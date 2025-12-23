@@ -1,0 +1,39 @@
+# Server / Port configuration
+server:
+  port: 8888
+
+
+spring:
+
+  # Data source configurations with database driver class
+  datasource:
+    url: jdbc:postgresql://localhost:5432/teachhive
+    username: postgres
+    ## Siz o'zgartirishingiz kerak bo'lgan joy ↓
+    password: linux
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20     # Hikari Connection Pool size maximum of 20 connections permitted
+
+  # JPA/ORM & SQL configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+    open-in-view: false
+
+  # Predefined configuration for Multipart form data uploads
+  servlet:
+    multipart:
+      max-request-size: 40MB
+      max-file-size: 40MB
+
+  # JWT Security configuration with key & expiration mills
+  security:
+    jwt:
+      secretKey: ad32d9d18099826e39f9ba452308dc1a18107e32257e9f819bd7f48b4e19b3ad9173ae1cf8748535ec7d159b49676941
+      jwtExpirationMs: 86400000
