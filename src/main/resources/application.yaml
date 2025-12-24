@@ -3,5 +3,5 @@ spring:
     name: Teach Hive
 
   profiles:
-    ## Siz localda ishga tushirganda active: local deb qo'yishingiz kerak bo'ladi ↓
+    ## TODO Siz localda ishga tushirganda active: local deb qo'yishingiz kerak bo'ladi ↓
     active: prod
