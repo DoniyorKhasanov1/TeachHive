@@ -10,7 +10,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/teachhive
     username: postgres
-    ## Siz o'zgartirishingiz kerak bo'lgan joy ↓
+    ## todo Siz o'zgartirishingiz kerak bo'lgan joy ↓
     password: linux
     driver-class-name: org.postgresql.Driver
     hikari:
