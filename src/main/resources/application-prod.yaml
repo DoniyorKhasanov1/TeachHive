@@ -1,7 +1,8 @@
 # Server / Port configuration
 server:
   port: 8888
-
+  servlet:
+    context-path: /api # Application ishga tushganda so'rovlarni boshlang'ich prefiksini belgilaydi, masalan https://somewhere.com/api
 
 spring:
 
