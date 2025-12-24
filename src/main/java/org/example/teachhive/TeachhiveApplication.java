@@ -8,13 +8,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 import static org.example.teachhive.util.LogUtil.logApplicationStartup;
 @EnableWebSecurity
-@EnableJpaRepositories
+@EnableJpaRepositories(basePackages = "org.example.teachhive.repository")
 @SpringBootApplication
 public class TeachhiveApplication {
 
 	public static void main(String[] args) {
         SpringApplication application = new SpringApplication(TeachhiveApplication.class);
         ConfigurableEnvironment environment = application.run(args).getEnvironment();
+        System.out.println("Starting Application ...");
         logApplicationStartup(environment);
 	}
 
