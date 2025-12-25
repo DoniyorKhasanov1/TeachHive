@@ -1,11 +1,13 @@
 package org.example.teachhive.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.teachhive.entity.base.BaseUUIDEntity;
+import org.example.teachhive.enums.Position;
+import org.example.teachhive.enums.ResourceType;
 
 import java.util.UUID;
 
@@ -16,22 +18,27 @@ import java.util.UUID;
 @Entity
 
 @Table(name = "resources")
-public class Resources {
+public class Resource extends BaseUUIDEntity {
 
-    private UUID id;
-
+    @Column(nullable = false)
     private String name;
 
     private byte[] photo;
 
     private String about;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Position position;
 
     private String downloadLink;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ResourceType resourceType;
 
+    @ManyToOne
+    @Column(nullable = false)
     private User author;
 
 }

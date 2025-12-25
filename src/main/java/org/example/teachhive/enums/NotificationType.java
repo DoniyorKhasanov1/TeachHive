@@ -1,4 +1,4 @@
-package org.example.teachhive.entity;
+package org.example.teachhive.enums;
 
 
 import jakarta.persistence.Table;

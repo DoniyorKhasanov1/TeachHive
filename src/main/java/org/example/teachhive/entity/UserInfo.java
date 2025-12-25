@@ -1,13 +1,13 @@
 package org.example.teachhive.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.UUID;
+import org.example.teachhive.entity.base.BaseUUIDEntity;
+import org.example.teachhive.enums.Position;
+import org.example.teachhive.enums.UserGoals;
 
 @Getter
 @Setter
@@ -16,18 +16,21 @@ import java.util.UUID;
 @Entity
 
 @Table(name = "userinfo")
-public class UserInfo {
+public class UserInfo extends BaseUUIDEntity {
 
-    private UUID id;
-
+    @OneToOne
+    @Column(nullable = false)
     private User user;
 
     private String schoolOrInsName;
 
+    @Enumerated(EnumType.STRING)
     private Position subjactType;
 
     private int classGrade;
 
+    @Enumerated(EnumType.STRING)
+    @OneToMany
     private UserGoals userGoals;
 
 }
