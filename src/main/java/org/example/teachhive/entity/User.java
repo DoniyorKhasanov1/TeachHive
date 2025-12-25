@@ -27,6 +27,9 @@ public class User extends BaseUUIDEntity implements UserDetails {
     @Column(updatable = false)
     private String username;
 
+    @Column(nullable = false)
+    private String email;
+
     private String phoneNumber;
 
     private String password;

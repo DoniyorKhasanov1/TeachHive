@@ -19,13 +19,12 @@ import org.example.teachhive.enums.UserGoals;
 public class UserInfo extends BaseUUIDEntity {
 
     @OneToOne
-    @Column(nullable = false)
     private User user;
 
     private String schoolOrInsName;
 
     @Enumerated(EnumType.STRING)
-    private Position subjactType;
+    private Position subjectType;
 
     private int classGrade;
 
