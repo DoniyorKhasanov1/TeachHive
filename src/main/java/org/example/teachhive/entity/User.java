@@ -18,19 +18,23 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+@Builder
 public class User extends BaseUUIDEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(updatable = false)
+    @Column(updatable = false, unique = true)
     private String username;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(nullable = false)
+    private String email;
 
     @Column(columnDefinition = "boolean default false")
     private boolean deleted;

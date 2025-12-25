@@ -2,7 +2,7 @@ package org.example.teachhive.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.example.teachhive.payload.AuthRequest;
+import org.example.teachhive.payload.LoginRequest;
 import org.example.teachhive.payload.AuthResponse;
 import org.example.teachhive.service.AuthService;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping
-    private ResponseEntity<String> login(AuthRequest request){ //Vaqtinchalik String qaytaramiz
+    private ResponseEntity<AuthResponse> login(LoginRequest request){
         service.login(request);
         return ResponseEntity.ok("SUCCESS");
     }

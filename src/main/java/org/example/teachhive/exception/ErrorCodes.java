@@ -14,6 +14,7 @@ public enum ErrorCodes {
     NotFound(404, "NOT_FOUND"),
     InternalServerError(500, "INTERNAL_SERVER_ERROR"),
     AlreadyExists(409, "ALREADY_EXISTS"),
+    INVALID_CREDENTIALS(407, "INVALID_CREDENTIALS")
     ;
 
     private final int statusCode;
