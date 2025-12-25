@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.teachhive.enums.Position;
+import org.example.teachhive.enums.ResourceType;
 
 import java.util.UUID;
 
