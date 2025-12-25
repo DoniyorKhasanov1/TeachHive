@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -43,8 +45,19 @@ public class User extends BaseUUIDEntity implements UserDetails {
 
     @Column(columnDefinition = "boolean default true")
     private Boolean isEnabled;
+
+    private LocalDate joinedAt;
+
+    private String bio;
+
+    private String webUrl;
+
+    private byte[] avatarka;
+
+    private Position position;
+
     @Override
-    public Collection< ? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role.name()));
         return authorities;
@@ -70,4 +83,6 @@ public class User extends BaseUUIDEntity implements UserDetails {
     public @NonNull String getUsername() {
         return this.username;
     }
+
+
 }
