@@ -1,5 +1,6 @@
 package org.example.teachhive.entity;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -15,19 +16,19 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 
-@Table(name = "userinfo")
-public class UserInfo {
+
+@Table(name = "notifications")
+public class Notifications {
 
     private UUID id;
 
-    private User user;
+    private String title;
 
-    private String schoolOrInsName;
+    private NotificationType type;
 
-    private Position subjactType;
+    private boolean isRead;
 
-    private int classGrade;
+    private boolean isDeleted;
 
-    private UserGoals userGoals;
 
 }

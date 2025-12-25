@@ -15,19 +15,23 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 
-@Table(name = "userinfo")
-public class UserInfo {
+@Table(name = "resources")
+public class Resources {
 
     private UUID id;
 
-    private User user;
+    private String name;
 
-    private String schoolOrInsName;
+    private byte[] photo;
 
-    private Position subjactType;
+    private String about;
 
-    private int classGrade;
+    private Position position;
 
-    private UserGoals userGoals;
+    private String downloadLink;
+
+    private ResourceType resourceType;
+
+    private User author;
 
 }
