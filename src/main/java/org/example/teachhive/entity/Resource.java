@@ -38,7 +38,6 @@ public class Resource extends BaseUUIDEntity {
     private ResourceType resourceType;
 
     @ManyToOne
-    @Column(nullable = false)
     private User author;
 
 }

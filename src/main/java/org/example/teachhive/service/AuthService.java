@@ -1,7 +1,11 @@
 package org.example.teachhive.service;
 
-import org.example.teachhive.payload.AuthRequest;
+import org.example.teachhive.payload.LoginRequest;
+import org.example.teachhive.payload.AuthResponse;
+import org.example.teachhive.payload.RegisterRequest;
 
 public interface AuthService {
-    void login(AuthRequest req);
+    AuthResponse login(LoginRequest req);
+
+    AuthResponse register(RegisterRequest request);
 }

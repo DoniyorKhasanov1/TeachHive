@@ -2,6 +2,7 @@ package org.example.teachhive.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.teachhive.entity.base.BaseUUIDEntity;
 import org.example.teachhive.enums.Position;
 import org.example.teachhive.enums.Role;
@@ -20,22 +21,23 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+@SuperBuilder
 public class User extends BaseUUIDEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(updatable = false)
+    @Column(updatable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
-    private String email;
-
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column(nullable = false)
+    private String email;
 
     @Column(columnDefinition = "boolean default false")
     private boolean deleted;
@@ -45,17 +47,14 @@ public class User extends BaseUUIDEntity implements UserDetails {
     @Column(columnDefinition = "boolean default true")
     private Boolean isEnabled;
 
-    @Column(nullable = false)
     private LocalDate joinedAt;
 
     private String bio;
 
     private String webUrl;
 
-    @Column(nullable = false)
     private byte[] avatar;
 
-    @Enumerated(EnumType.STRING)
     private Position position;
 
     @Override
