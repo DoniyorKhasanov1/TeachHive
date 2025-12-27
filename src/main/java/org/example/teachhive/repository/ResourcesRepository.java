@@ -1,6 +1,6 @@
 package org.example.teachhive.repository;
 
-import org.example.teachhive.entity.Resources;
+import org.example.teachhive.entity.Resource;
 import org.example.teachhive.enums.Position;
 import org.example.teachhive.enums.ResourceType;
 import org.example.teachhive.entity.User;
@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ResourcesRepository extends JpaRepository<Resources, UUID> {
+public interface ResourcesRepository extends JpaRepository<Resource, UUID> {
 
-    List<Resources> findByPosition(Position position);
+    List<Resource> findByPosition(Position position);
 
-    List<Resources> findByResourceType(ResourceType resourceType);
+    List<Resource> findByResourceType(ResourceType resourceType);
 
-    List<Resources> findByAuthor(User author);
+    List<Resource> findByAuthor(User author);
 
-    List<Resources> findByPositionAndResourceType(Position position, ResourceType resourceType);
+    List<Resource> findByPositionAndResourceType(Position position, ResourceType resourceType);
 }

@@ -9,12 +9,14 @@ import org.example.teachhive.entity.base.BaseUUIDEntity;
 import org.example.teachhive.enums.Position;
 import org.example.teachhive.enums.UserGoals;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 @Table(name = "userinfo")
 public class UserInfo extends BaseUUIDEntity {
 
@@ -28,8 +30,8 @@ public class UserInfo extends BaseUUIDEntity {
 
     private int classGrade;
 
+    @ElementCollection(targetClass = UserGoals.class)
     @Enumerated(EnumType.STRING)
-    @OneToMany
-    private UserGoals userGoals;
+    private Set<UserGoals> userGoals = new HashSet<>();
 
 }

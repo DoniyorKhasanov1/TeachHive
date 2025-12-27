@@ -1,4 +1,5 @@
 package org.example.teachhive.config.security;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -13,10 +14,10 @@ import java.util.Date;
 @Component
 public class JwtService {
 
-    @Value("${spring.security.jwt.secretKey}")
+    @Value("${application.security.jwt.secretKey}")
     private String jwtSecret;
 
-    @Value("${spring.security.jwt.jwtExpirationMs}")
+    @Value("${application.security.jwt.jwtExpirationMs}")
     private long jwtExpirationMs;
 
     private SecretKey getSigningKey() {
@@ -24,12 +25,11 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-
     public String generateToken(String username) {
         return Jwts.builder()
-                .subject(username)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
+                .setSubject(username)   // username yoki userId
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(getSigningKey())
                 .compact();
     }

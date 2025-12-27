@@ -8,7 +8,7 @@ public record RegisterRequest(
         String fullName,
         @NotBlank(message = "Username must be provided")
         @Size(min = 3)
-        String userName,
+        String username,
         @NotBlank(message = "Phone Number must be provided")
         String phoneNumber,
 

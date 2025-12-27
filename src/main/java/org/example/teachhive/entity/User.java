@@ -2,6 +2,7 @@ package org.example.teachhive.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.example.teachhive.entity.base.BaseUUIDEntity;
 import org.example.teachhive.enums.Position;
 import org.example.teachhive.enums.Role;
@@ -20,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@Builder
+@SuperBuilder
 public class User extends BaseUUIDEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
