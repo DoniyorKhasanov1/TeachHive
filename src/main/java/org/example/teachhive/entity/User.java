@@ -3,13 +3,13 @@ package org.example.teachhive.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.teachhive.entity.base.BaseUUIDEntity;
+import org.example.teachhive.enums.Position;
 import org.example.teachhive.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +52,7 @@ public class User extends BaseUUIDEntity implements UserDetails {
 
     private String webUrl;
 
-    private byte[] avatarka;
+    private byte[] avatar;
 
     private Position position;
 
