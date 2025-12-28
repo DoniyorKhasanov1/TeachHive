@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @since 2025-12-24
- * @author Doniyor Khasanov (doniyork334@gmail.com)
+ * @author Doniyor Khasanov (engineerkhasanov@gmail.com)
  * @implNote This class is used to retrieve user by its username*/
 @Service
 @RequiredArgsConstructor
