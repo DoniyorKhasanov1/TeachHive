@@ -1,8 +1,6 @@
 # Server / Port configuration
 server:
   port: 8888
-  servlet:
-    context-path: /api # Application ishga tushganda so'rovlarni boshlang'ich prefiksini belgilaydi, masalan https://somewhere.com/api
 
 spring:
 
@@ -32,7 +30,31 @@ spring:
       max-request-size: 40MB
       max-file-size: 40MB
 
+  mail:
+    # Which host we use
+    host: smtp.gmail.com
+    # The port through which mailing messages are sent
+    port: 587
+    # My email address as a producer
+    username: doniyork334@gmail.com
+    # App password (!Sensitive data)
+    password: "ujxr khbu ognm wsmn"
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+# Logging configurations for further details throughout the execution flow
+logging:
+  level:
+    org.example.server: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.mail: DEBUG
+  pattern:
+    # Logging pattern for printing out (Dragged from AI)
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID}){magenta} --- %clr(%logger{36}){cyan} : %m%n"
+
   # JWT Security configuration with key & expiration mills
+application:
   security:
     jwt:
       secretKey: ad32d9d18099826e39f9ba452308dc1a18107e32257e9f819bd7f48b4e19b3ad9173ae1cf8748535ec7d159b49676941
