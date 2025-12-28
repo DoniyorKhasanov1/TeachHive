@@ -26,17 +26,17 @@ public class User extends BaseUUIDEntity implements UserDetails {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(updatable = false, unique = true)
+    @Column(nullable = false, updatable = false, unique = true)
     private String username;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false, updatable = false)
     private String phoneNumber;
 
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(columnDefinition = "boolean default false")
@@ -47,6 +47,7 @@ public class User extends BaseUUIDEntity implements UserDetails {
     @Column(columnDefinition = "boolean default true")
     private Boolean isEnabled;
 
+    @Column(nullable = false, updatable = false)
     private LocalDate joinedAt;
 
     private String bio;
@@ -55,6 +56,7 @@ public class User extends BaseUUIDEntity implements UserDetails {
 
     private byte[] avatar;
 
+    @Enumerated(EnumType.STRING)
     private Position position;
 
     @Override

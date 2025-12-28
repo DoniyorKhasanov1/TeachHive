@@ -12,6 +12,8 @@ import org.example.teachhive.payload.RegisterRequest;
 import org.example.teachhive.repository.UserRepository;
 import org.example.teachhive.service.AuthService;
 import org.example.teachhive.service.EmailVerificationService;
+import org.example.teachhive.util.UserRegisteredEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,15 +28,16 @@ public class AuthServiceImplementation implements AuthService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final EmailVerificationService emailVerificationService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
     public AuthResponse register(RegisterRequest request) throws MessagingException {
         User user = userMapper.toEntity(request);
         user.setIsEnabled(false);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        eventPublisher.publishEvent(new UserRegisteredEvent(savedUser.getId()));
         String token = jwtService.generateToken(user.getPhoneNumber());
-        emailVerificationService.sendVerificationEmail(user);
         log.info("User {} successfully registered\nEmail sent to {}", user.getFullName(), user.getEmail());
         return AuthResponse.builder()
                 .token(token)

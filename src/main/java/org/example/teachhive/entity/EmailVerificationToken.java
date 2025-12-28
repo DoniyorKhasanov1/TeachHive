@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "VerifyToken")
 @Table(name = "email_verification_tokens")
 public class EmailVerificationToken {
     @Id

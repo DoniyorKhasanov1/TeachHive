@@ -1,5 +1,6 @@
 package org.example.teachhive.service;
 
+import jakarta.mail.MessagingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,7 @@ import org.example.teachhive.exception.RestException;
 import org.example.teachhive.repository.EmailVerificationTokenRepository;
 import org.example.teachhive.repository.UserRepository;
 import org.example.teachhive.util.AppConstants;
-import org.springframework.messaging.MessagingException;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,21 +27,36 @@ public class EmailVerificationService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void sendVerificationEmail(User user) throws MessagingException, jakarta.mail.MessagingException {
+    public void sendVerificationEmail(UUID userId) throws MessagingException {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RestException("User not found", ErrorCodes.NotFound));
+
         String token = UUID.randomUUID().toString();
 
+        log.info("This is the token sent to user => {}", token);
         EmailVerificationToken verificationToken = new EmailVerificationToken();
         verificationToken.setToken(token);
         verificationToken.setUser(user);
         verificationToken.setExpiryDate(LocalDateTime.now().plusMinutes(30));
+
         tokenRepository.save(verificationToken);
 
-        String verifyLink = "http://localhost:8888" + AppConstants.BASE_PATH + "/auth/verify?token=" + token;
+        String verifyLink = "http://localhost:8888"
+                + AppConstants.BASE_PATH
+                + "/auth/verify?token=" + token;
+
         String htmlBody = getMessagePage(user, token, verifyLink);
 
-        emailSenderService.sendHtmlEmail(user.getEmail(), "Email Verification", htmlBody);
-        log.warn("From 'sendVerificationEmail()': Token sent to email: {}", user.getEmail());
+        emailSenderService.sendHtmlEmail(
+                user.getEmail(),
+                "Email Verification",
+                htmlBody
+        );
+
+        log.warn("Verification email sent to {}", user.getEmail());
     }
+
 
     private static String getMessagePage(User user, String token, String verifyLink) {
         String ignoreLink = "http://localhost:8888" + AppConstants.BASE_PATH + "/auth/ignore?token=" + token;
@@ -48,9 +64,9 @@ public class EmailVerificationService {
         return "<html><body>"
                 + "<h2>Hello " + user.getFullName() + ",\nWelcome to Teach Hive</h2>"
                 + "<p>Click the button below to verify your email:</p>"
-                + "<a href='" + verifyLink + "' style='display:inline-block; padding:10px 20px; color:white; background-color:green; text-decoration:none; border-radius:5px;'>Verify Email</a>"
+                + "<a href='" + verifyLink + "' style='display:inline-block; padding:10px 20px; color:white; background-color:green; text-decoration:none; border-radius:5px;'>Verify Email</a> <br>"
+                + "<p>If you didn't register, just ignore this email.</p> <br>"
                 + "<a href='" + ignoreLink + "' style='display:inline-block; padding:10px 20px; color:white; background-color:red; text-decoration:none; border-radius:5px; margin-left:10px;'>Ignore</a>"
-                + "<p>If you didn't register, just ignore this email.</p>"
                 + "</body></html>";
     }
 
@@ -66,8 +82,6 @@ public class EmailVerificationService {
         User user = verificationToken.getUser();
         user.setIsEnabled(true);
         userRepository.save(user);
-
-        tokenRepository.delete(verificationToken);
     }
 
     public void ignoreVerification(String token) {

@@ -33,13 +33,13 @@ public class AuthController {
         return ResponseEntity.ok(authService.register(request));
     }
 
-    @PostMapping("/verify")
+    @GetMapping("/verify")
     @Operation(description = "Verifying code sent to email")
     public ResponseEntity<AuthResponse> verifyEmail(@RequestParam("token") String token) {
         return ResponseEntity.ok(authService.verifyEmail(token));
     }
 
-    @PostMapping("/ignore")
+    @GetMapping("/ignore")
     @Operation(description = "Ignoring when user presses 'Ignore verification button in message sent to email'")
     public ResponseEntity<AuthResponse> ignoreVerification(@RequestParam("token") String token) {
         return ResponseEntity.ok(authService.ignoreVerification(token));
