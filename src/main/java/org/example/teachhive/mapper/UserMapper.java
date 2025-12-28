@@ -10,6 +10,9 @@ import org.example.teachhive.exception.ErrorCodes;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
@@ -29,8 +32,9 @@ public class UserMapper {
                 .phoneNumber(request.phoneNumber())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
-                .isEnabled(true)
                 .deleted(false)
+                .joinedAt(LocalDate.now(ZoneId.of("Asia/Tashkent")))
+                .accountExpired(false)
                 .build();
     }
 
