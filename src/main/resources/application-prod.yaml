@@ -40,8 +40,11 @@ spring:
     # App password (!Sensitive data)
     password: "ujxr khbu ognm wsmn"
     properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 # Logging configurations for further details throughout the execution flow
 logging:
